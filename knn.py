@@ -38,8 +38,7 @@ def findMax(neighbors):
             m = d[key]
             res = key
     return res
-def classify(item, k):
-    global items
+def classify(items, item, k):
     if k>len(items):
         k = len(items)
     neighbors = []
@@ -65,7 +64,7 @@ def KNNclassifier(f):
         for i in range(t, size[0]):
             item = a[i][:-1]
             cl = a[i][-1]
-            res = classify(item, low)
+            res = classify(items, item, low)
             if res==cl:
                 correct+=1
             total+=1
@@ -75,7 +74,7 @@ def KNNclassifier(f):
         for i in range(t, size[0]):
             item = a[i][:-1]
             cl = a[i][-1]
-            res = classify(item, high)
+            res = classify(items, item, high)
             if res==cl:
                 correct+=1
             total+=1
@@ -85,7 +84,7 @@ def KNNclassifier(f):
         for i in range(t, size[0]):
             item = a[i][:-1]
             cl = a[i][-1]
-            res = classify(item, mid)
+            res = classify(items, item, mid)
             if res==cl:
                 correct+=1
             total+=1

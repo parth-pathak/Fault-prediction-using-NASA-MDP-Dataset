@@ -1,6 +1,6 @@
 import arff
 import numpy as np
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.naive_bayes import GaussianNB
 import os
 from sklearn.model_selection import train_test_split
 
@@ -23,7 +23,7 @@ for f in files:
         else:
             y[g] = 0.0
     print('      Training......')
-    clf = RandomForestRegressor(n_estimators = 100, random_state = 0)
+    clf = GaussianNB()
     clf.fit(x, y)
     print('      Done......')
     correct = 0

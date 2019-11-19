@@ -2,6 +2,7 @@ import os
 import arff
 import xlwt
 import numpy as np
+from sklearn.model_selection import train_test_split
 files = []
 data_path = "MDP\\D''\\"
 for f in os.listdir(data_path):
@@ -38,24 +39,26 @@ for i in range(len(files)):
     a = np.array(list(arff.load(f_path)))
     size = a.shape
     sheet1.write(i+3, 2, str(size[1]))
-    t = int(0.8 * size[0])
-    sheet1.write(i+3, 3, str(t))
-    sheet1.write(i+3, 4, str(size[0]-t))
+    X = a[:,:-1]
+    y = a[:,-1]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+    sheet1.write(i+3, 3, str(len(X_train)))
+    sheet1.write(i+3, 4, str(len(X_test)))
     y = 0
     n = 0
-    for r in range(t):
-        if a[r][-1]=='Y':
+    for r in range(len(y_train)):
+        if y_train[r]=='Y':
             y += 1
-        if a[r][-1]=='N':
+        if y_train[r]=='N':
             n += 1
     sheet1.write(i+3, 5, str(y))
     sheet1.write(i+3, 6, str(n))
     y = 0
     n = 0
-    for r in range(t, size[0]):
-        if a[r][-1]=='Y':
+    for r in range(len(y_test)):
+        if y_test[r]=='Y':
             y += 1
-        if a[r][-1]=='N':
+        if y_test[r]=='N':
             n += 1
     sheet1.write(i+3, 7, str(y))
     sheet1.write(i+3, 8, str(n))
