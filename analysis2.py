@@ -2,7 +2,7 @@ import os
 import arff
 import numpy as np
 from sklearn import metrics
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -52,7 +52,7 @@ y_pred = clf.predict(X_test)
 print(metrics.accuracy_score(y_test, y_pred))
 
 print("SVM...", end="")
-clf = SVC(kernel='linear')
+clf = LinearSVC(random_state=0)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 print(metrics.accuracy_score(y_test, y_pred))
