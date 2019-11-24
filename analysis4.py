@@ -10,7 +10,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 
 data_path = "MDP\\D''\\"
-f = os.path.join(data_path, "PC5.arff")
+f = os.path.join(data_path, "CM1.arff")
 
 a = np.array(list(arff.load(f)))
 size = a.shape
@@ -27,32 +27,32 @@ Y = np.array(Y).astype(np.float64)
 X = np.array(X).astype(np.float64)
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=1)
 
-print("Gaussian Naive Bayes...", end="")
+print("Gaussian Naive Bayes...")
 gnb = GaussianNB()
 gnb.fit(X_train, y_train)
 y_pred = gnb.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred))
+print(metrics.classification_report(y_test, y_pred))
 
-print("Random Forest...", end="")
+print("Random Forest...")
 clf = RandomForestClassifier(n_estimators = 100, max_depth=2, random_state = 0)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred))
+print(metrics.classification_report(y_test, y_pred))
 
-print("AdaBoost...", end="")
+print("AdaBoost...")
 clf = AdaBoostClassifier(n_estimators = 100, random_state = 0)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred))
+print(metrics.classification_report(y_test, y_pred))
 
-print("K Nearest Neighbors...", end="")
+print("K Nearest Neighbors...")
 clf = KNeighborsClassifier(n_neighbors=7)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred))
+print(metrics.classification_report(y_test, y_pred))
 
-print("SVM...", end="")
+print("SVM...")
 clf = LinearSVC(random_state=0)
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print(metrics.accuracy_score(y_test, y_pred))
+print(metrics.classification_report(y_test, y_pred))
