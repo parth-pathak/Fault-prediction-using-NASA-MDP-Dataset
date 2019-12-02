@@ -8,11 +8,11 @@ data_path = "MDP\\D''\\"
 for f in os.listdir(data_path):
     files.append(f)
 workbook = xlwt.Workbook()
-style = xlwt.easyxf('font: bold 1; align: horiz center')
+style = xlwt.easyxf('font: bold 1; align: wrap on,vert centre, horiz center;')
 sheet1 = workbook.add_sheet('Sheet 1')
 sheet1.write(0, 0, 'Serial No.', style)
 sheet1.write(0, 1, 'Dataset', style)
-sheet1.write(0, 2, '#Features', style)
+sheet1.write(0, 2, 'No. of Features', style)
 sheet1.write(0, 3, 'No. of Instances', style)
 sheet1.merge(0, 0, 3, 4)
 sheet1.write(0, 5, 'No. of Classes', style)
