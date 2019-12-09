@@ -1,19 +1,9 @@
-import os
-import arff
 import math
 import numpy as np
 import random
 def second(a):
     return a[1]
-files = []
-data_path = "MDP\\D''\\"
-target_path = "MDP\\D-bl1\\"
-for f in os.listdir(data_path):
-    files.append(f)
-for f in range(len(files)):
-    print(f, end="...")
-    f_path = os.path.join(data_path, files[f])
-    inst = list(arff.load(f_path))
+def apply(inst):
     majority = []
     minority = []
     for i in inst:
@@ -60,6 +50,4 @@ for f in range(len(files)):
             synthetic.append(temp)
     for i in synthetic:
         inst.append(i)
-    path = os.path.join(target_path, files[f])
-    arff.dump(path, inst, relation=files[f][:-5])
-    print('done')
+    return inst

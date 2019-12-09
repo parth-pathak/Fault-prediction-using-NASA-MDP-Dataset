@@ -1,6 +1,7 @@
 import os
 import arff
 import xlwt
+import math
 import numpy as np
 from sklearn.model_selection import train_test_split
 files = []
@@ -39,11 +40,12 @@ for i in range(len(files)):
     a = np.array(list(arff.load(f_path)))
     size = a.shape
     sheet1.write(i+3, 2, str(size[1]))
+    t = math.ceil(0.8*size[0])
     X = a[:,:-1]
     y = a[:,-1]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
-    sheet1.write(i+3, 3, str(len(X_train)))
-    sheet1.write(i+3, 4, str(len(X_test)))
+    sheet1.write(i+3, 3, str(t))
+    sheet1.write(i+3, 4, str(size[0]-t))
     y = 0
     n = 0
     for r in range(len(y_train)):
@@ -53,6 +55,7 @@ for i in range(len(files)):
             n += 1
     sheet1.write(i+3, 5, str(y))
     sheet1.write(i+3, 6, str(n))
+    sheet1.write(i+3, 9, str(y/n))
     y = 0
     n = 0
     for r in range(len(y_test)):
